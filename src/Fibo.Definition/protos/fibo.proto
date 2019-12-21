@@ -1,0 +1,17 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Fibo.Definition";
+
+// Service for returning static data
+service Fibo {
+  // Returns the fibonacci numeral by a given index
+  rpc GetFiboNumberByIndex(FiboNumberByIndexRequest) returns (FiboNumberByIndexReply) {}
+}
+
+message FiboNumberByIndexRequest {
+	int32 index = 1;
+}
+
+message FiboNumberByIndexReply {
+	int32 fiboNumber = 1;
+}

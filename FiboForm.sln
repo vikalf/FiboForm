@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B3154F37-F13D-4B3D-A4B1-1F7B7067DEC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployment", "deployment", "{9BDD75DB-0CA9-40A4-A7B8-E474C9F2A2BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiboForm.Web", "src\FiboForm.Web\FiboForm.Web.csproj", "{7873CEDE-445B-4449-BD86-CB843A3D5EDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiboForm.Api", "src\FiboForm.Api\FiboForm.Api.csproj", "{D8A0A306-6B7C-47B0-B7C6-F34E8BE40EAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fibo.Definition", "src\Fibo.Definition\Fibo.Definition.csproj", "{856377F3-3D5F-44B4-83ED-941E98748E72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fibo.Service", "src\Fibo.Service\Fibo.Service.csproj", "{13954675-FABA-40AF-9EFE-B5D82EED8105}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7873CEDE-445B-4449-BD86-CB843A3D5EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7873CEDE-445B-4449-BD86-CB843A3D5EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7873CEDE-445B-4449-BD86-CB843A3D5EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7873CEDE-445B-4449-BD86-CB843A3D5EDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8A0A306-6B7C-47B0-B7C6-F34E8BE40EAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8A0A306-6B7C-47B0-B7C6-F34E8BE40EAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8A0A306-6B7C-47B0-B7C6-F34E8BE40EAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8A0A306-6B7C-47B0-B7C6-F34E8BE40EAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{856377F3-3D5F-44B4-83ED-941E98748E72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{856377F3-3D5F-44B4-83ED-941E98748E72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{856377F3-3D5F-44B4-83ED-941E98748E72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{856377F3-3D5F-44B4-83ED-941E98748E72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13954675-FABA-40AF-9EFE-B5D82EED8105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13954675-FABA-40AF-9EFE-B5D82EED8105}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13954675-FABA-40AF-9EFE-B5D82EED8105}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13954675-FABA-40AF-9EFE-B5D82EED8105}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7873CEDE-445B-4449-BD86-CB843A3D5EDE} = {B3154F37-F13D-4B3D-A4B1-1F7B7067DEC2}
+		{D8A0A306-6B7C-47B0-B7C6-F34E8BE40EAA} = {B3154F37-F13D-4B3D-A4B1-1F7B7067DEC2}
+		{856377F3-3D5F-44B4-83ED-941E98748E72} = {B3154F37-F13D-4B3D-A4B1-1F7B7067DEC2}
+		{13954675-FABA-40AF-9EFE-B5D82EED8105} = {B3154F37-F13D-4B3D-A4B1-1F7B7067DEC2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DF151166-8D6C-445A-AED7-96CC28453D31}
+	EndGlobalSection
+EndGlobal
