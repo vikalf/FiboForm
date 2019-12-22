@@ -5,3 +5,6 @@
 @rem client.getFiboNumberByIndex({index: 3}, pr);
 
 @rem client.getVisitedIndexes({}, pr);
+
+@rem docker run -p 5432:5432 -e POSTGRES_PASSWORD=password01 -e POSTGRES_USER=superuser -e POSTGRES_DB=maindb -d postgres
+@rem docker run -p 6379:6379 redis
