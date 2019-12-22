@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using Fibo.Service.Repositories.Definition;
 
 namespace Fibo.Service.Components.Implementation
 {
@@ -14,11 +15,13 @@ namespace Fibo.Service.Components.Implementation
     {
         private readonly IDistributedCache _distributedCache;
         private readonly ILogger<FiboComponent> _logger;
+        private readonly IFiboRepository _fiboRepository;
 
-        public FiboComponent(IDistributedCache distributedCache, ILogger<FiboComponent> logger)
+        public FiboComponent(IDistributedCache distributedCache, ILogger<FiboComponent> logger, IFiboRepository fiboRepository)
         {
             _distributedCache = distributedCache;
             _logger = logger;
+            _fiboRepository = fiboRepository;
         }
 
         public async Task<FiboResultModel> GetFiboNumeralByIndex(int index)
@@ -29,28 +32,33 @@ namespace Fibo.Service.Components.Implementation
             var result = new FiboResultModel {  FiboNumeral = fiboNumeral };
             result.VisitedValues = await GetVisitedValuesFromRedis(index, fiboNumeral);
 
+            await _fiboRepository.CreateVisitValuesTable();
+            await _fiboRepository.InsertValue(index);
+
             return result;
+        }
+
+        public async Task<List<int>> GetVisitedIndexes()
+        {
+            return await _fiboRepository.GetVisitedValuesFromDb();
         }
 
         private async Task<Dictionary<int, int>> GetVisitedValuesFromRedis(int index, int fiboNumeral)
         {
             var cacheKey = "fibo_visited_values";
             var visitedValuesBytes = await _distributedCache.GetAsync(cacheKey);
-
+            var values = new Dictionary<int, int>();
             if (visitedValuesBytes == null)
             {
                 // if Empty, save first key-value pair
-                var values = new Dictionary<int, int>();
                 values.Add(index, fiboNumeral);
-
                 var valuesBytes = Helpers.ToByteArray<Dictionary<int, int>>(values);
                 await _distributedCache.SetAsync(cacheKey, valuesBytes);
-                return values;
             }
             else
             {
                 var valuesBytes = await _distributedCache.GetAsync(cacheKey);
-                var values = Helpers.FromByteArray<Dictionary<int, int>>(valuesBytes);
+                values = Helpers.FromByteArray<Dictionary<int, int>>(valuesBytes);
 
                 if (!values.Any(e => e.Key == index))
                 {
@@ -58,9 +66,9 @@ namespace Fibo.Service.Components.Implementation
                     valuesBytes = Helpers.ToByteArray<Dictionary<int, int>>(values);
                     await _distributedCache.SetAsync(cacheKey, valuesBytes);
                 }
-
-                return values;
             }
+
+            return values;
 
         }
 
@@ -87,5 +95,7 @@ namespace Fibo.Service.Components.Implementation
             return result;
 
         }
+
+        
     }
 }

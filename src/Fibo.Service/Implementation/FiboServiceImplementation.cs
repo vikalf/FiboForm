@@ -4,6 +4,7 @@ using Grpc.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Fibo.Service.Implementation
@@ -49,5 +50,23 @@ namespace Fibo.Service.Implementation
                 throw new RpcException(new Status(StatusCode.Internal, "Grpc Error GetFiboNumberByIndex({index})"));
             }
         }
+
+        public async override Task<VisitedIndexesReply> GetVisitedIndexes(EmptyRequest request, ServerCallContext context)
+        {
+            try
+            {
+                List<int> result = await _fiboComponent.GetVisitedIndexes();
+                var reply = new VisitedIndexesReply();
+                reply.Values.AddRange(result);
+
+                return reply;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Grpc Error GetVisitedIndexes()");
+                throw new RpcException(new Status(StatusCode.Internal, "Grpc Error GetVisitedIndexes()"));
+            }
+        }
+
     }
 }

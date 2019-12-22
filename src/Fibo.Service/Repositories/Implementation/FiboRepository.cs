@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Fibo.Service.Repositories.Definition;
+using FiboForm.Common;
 using Npgsql;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,14 +34,20 @@ namespace Fibo.Service.Repositories.Implementation
             using (var cnn = GetConnection())
             {
                 await cnn.OpenAsync();
-                var result = await cnn.QueryAsync<int>("INSERT INTO FiboIndex(FiboIndex) VALUES(@index)", param: new { index });
+                var result = await cnn.QueryAsync<int>("INSERT INTO VisitedValues(FiboIndex) VALUES(@index)", param: new { index });
                 return result.ToList();
             }
         }
 
         private NpgsqlConnection GetConnection()
         {
-            return new NpgsqlConnection("Host=192.168.99.100:5432;Username=initdb;Password=password01;Database=initdb");
+            var server = EnvironmentSettings.GetEnvironmentVariable("PG_SERVER");
+            var port = EnvironmentSettings.GetEnvironmentVariable("PG_PORT");
+            var db = EnvironmentSettings.GetEnvironmentVariable("PG_DATABASE");
+            var userId = EnvironmentSettings.GetEnvironmentVariable("PG_USER");
+            var password = EnvironmentSettings.GetEnvironmentVariable("PG_PASSWORD");
+
+            return new NpgsqlConnection($"Server={server};Port={port};Database={db};User Id={userId};Password={password};");
         }
     }
 }

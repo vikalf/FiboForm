@@ -3,3 +3,5 @@
 @rem grpcc --proto fibo.proto -i --address 127.0.0.1:50051
 
 @rem client.getFiboNumberByIndex({index: 3}, pr);
+
+@rem client.getVisitedIndexes({}, pr);

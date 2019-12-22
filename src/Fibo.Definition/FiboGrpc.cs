@@ -17,6 +17,8 @@ namespace Fibo.Definition {
 
     static readonly grpc::Marshaller<global::Fibo.Definition.FiboNumberByIndexRequest> __Marshaller_FiboNumberByIndexRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Fibo.Definition.FiboNumberByIndexRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Fibo.Definition.FiboNumberByIndexReply> __Marshaller_FiboNumberByIndexReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Fibo.Definition.FiboNumberByIndexReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Fibo.Definition.EmptyRequest> __Marshaller_EmptyRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Fibo.Definition.EmptyRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Fibo.Definition.VisitedIndexesReply> __Marshaller_VisitedIndexesReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Fibo.Definition.VisitedIndexesReply.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Fibo.Definition.FiboNumberByIndexRequest, global::Fibo.Definition.FiboNumberByIndexReply> __Method_GetFiboNumberByIndex = new grpc::Method<global::Fibo.Definition.FiboNumberByIndexRequest, global::Fibo.Definition.FiboNumberByIndexReply>(
         grpc::MethodType.Unary,
@@ -24,6 +26,13 @@ namespace Fibo.Definition {
         "GetFiboNumberByIndex",
         __Marshaller_FiboNumberByIndexRequest,
         __Marshaller_FiboNumberByIndexReply);
+
+    static readonly grpc::Method<global::Fibo.Definition.EmptyRequest, global::Fibo.Definition.VisitedIndexesReply> __Method_GetVisitedIndexes = new grpc::Method<global::Fibo.Definition.EmptyRequest, global::Fibo.Definition.VisitedIndexesReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetVisitedIndexes",
+        __Marshaller_EmptyRequest,
+        __Marshaller_VisitedIndexesReply);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -42,6 +51,11 @@ namespace Fibo.Definition {
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::Fibo.Definition.FiboNumberByIndexReply> GetFiboNumberByIndex(global::Fibo.Definition.FiboNumberByIndexRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Fibo.Definition.VisitedIndexesReply> GetVisitedIndexes(global::Fibo.Definition.EmptyRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -115,6 +129,22 @@ namespace Fibo.Definition {
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetFiboNumberByIndex, null, options, request);
       }
+      public virtual global::Fibo.Definition.VisitedIndexesReply GetVisitedIndexes(global::Fibo.Definition.EmptyRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetVisitedIndexes(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Fibo.Definition.VisitedIndexesReply GetVisitedIndexes(global::Fibo.Definition.EmptyRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetVisitedIndexes, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Fibo.Definition.VisitedIndexesReply> GetVisitedIndexesAsync(global::Fibo.Definition.EmptyRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetVisitedIndexesAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Fibo.Definition.VisitedIndexesReply> GetVisitedIndexesAsync(global::Fibo.Definition.EmptyRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetVisitedIndexes, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override FiboClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -127,7 +157,8 @@ namespace Fibo.Definition {
     public static grpc::ServerServiceDefinition BindService(FiboBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_GetFiboNumberByIndex, serviceImpl.GetFiboNumberByIndex).Build();
+          .AddMethod(__Method_GetFiboNumberByIndex, serviceImpl.GetFiboNumberByIndex)
+          .AddMethod(__Method_GetVisitedIndexes, serviceImpl.GetVisitedIndexes).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -137,6 +168,7 @@ namespace Fibo.Definition {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, FiboBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_GetFiboNumberByIndex, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Fibo.Definition.FiboNumberByIndexRequest, global::Fibo.Definition.FiboNumberByIndexReply>(serviceImpl.GetFiboNumberByIndex));
+      serviceBinder.AddMethod(__Method_GetVisitedIndexes, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Fibo.Definition.EmptyRequest, global::Fibo.Definition.VisitedIndexesReply>(serviceImpl.GetVisitedIndexes));
     }
 
   }

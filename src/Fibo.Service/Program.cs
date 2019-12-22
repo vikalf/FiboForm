@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Serilog.Formatting.Compact;
 using System;
 using System.Threading;
 
@@ -20,6 +21,7 @@ namespace Fibo.Service
         static void Main(string[] args)
         {
             SetConfiguration();
+            CreateLogger();
 
             var serviceProvider = new ServiceCollection()
             .AddLogging(configure =>
@@ -31,6 +33,13 @@ namespace Fibo.Service
             .AddSingleton<IFiboRepository, FiboRepository>();
 
             SetupRedis(serviceProvider);
+
+            serviceProvider.AddLogging(loggingbuilder =>
+            {
+                loggingbuilder.AddConfiguration(Configuration.GetSection("Logging"));
+                loggingbuilder.AddDebug();
+                loggingbuilder.AddSerilog(dispose: true);
+            });
 
             var provider = serviceProvider.BuildServiceProvider();
 
@@ -68,12 +77,21 @@ namespace Fibo.Service
 
         private static void SetupRedis(IServiceCollection services)
         {
-            var redisAddress = EnvironmentSettings.GetEnvironmentVariable("REDIS_ADDRESS", "192.168.99.100:6379");
+            var redisAddress = EnvironmentSettings.GetEnvironmentVariable("REDIS_HOST", "192.168.99.100:6379");
+            var instanceName = EnvironmentSettings.GetEnvironmentVariable("REDIS_INSTANCE", "master");
             services.AddDistributedRedisCache(options =>
             {
                 options.Configuration = redisAddress;
-                options.InstanceName = "master";
+                options.InstanceName = instanceName;
             });
+        }
+
+        private static void CreateLogger()
+        {
+            Log.Logger = new LoggerConfiguration()
+              .WriteTo.Console(new CompactJsonFormatter())
+              .ReadFrom.Configuration(Configuration)
+              .CreateLogger();
         }
 
 

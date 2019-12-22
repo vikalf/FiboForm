@@ -4,9 +4,10 @@ using System.Threading.Tasks;
 
 namespace Fibo.Service.Repositories.Definition
 {
-    interface IFiboRepository
+    public interface IFiboRepository
     {
         Task CreateVisitValuesTable();
         Task<List<int>> GetVisitedValuesFromDb();
+        Task<List<int>> InsertValue(int index);
     }
 }
