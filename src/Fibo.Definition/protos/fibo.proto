@@ -6,6 +6,9 @@ option csharp_namespace = "Fibo.Definition";
 service Fibo {
   // Returns the fibonacci numeral by a given index
   rpc GetFiboNumberByIndex(FiboNumberByIndexRequest) returns (FiboNumberByIndexReply) {}
+
+  rpc GetVisitedIndexes(EmptyRequest) returns (VisitedIndexesReply) {}
+
 }
 
 message FiboNumberByIndexRequest {
@@ -14,4 +17,17 @@ message FiboNumberByIndexRequest {
 
 message FiboNumberByIndexReply {
 	int32 fiboNumber = 1;
+	repeated VisitedValue visitedValues = 2;
 }
+
+message VisitedValue {
+	int32 index = 1;
+	int32 value = 2;
+}
+
+message EmptyRequest {}
+
+message VisitedIndexesReply {
+	repeated int32 values = 1;
+}
+

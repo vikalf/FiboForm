@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Fibo.Service": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

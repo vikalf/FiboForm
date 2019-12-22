@@ -53,7 +53,7 @@ namespace Fibo.Definition {
     {
       /// <summary>Creates a new client for Fibo</summary>
       /// <param name="channel">The channel to use to make remote calls.</param>
-      public FiboClient(grpc::Channel channel) : base(channel)
+      public FiboClient(grpc::ChannelBase channel) : base(channel)
       {
       }
       /// <summary>Creates a new client for Fibo that uses a custom <c>CallInvoker</c>.</summary>
