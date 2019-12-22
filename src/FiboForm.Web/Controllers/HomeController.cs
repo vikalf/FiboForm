@@ -62,20 +62,6 @@ namespace FiboForm.Web.Controllers
             }
         }
 
-        private FiboModel GetTestModel()
-        {
-            return new FiboModel()
-            {
-                VisitedIndexes = new System.Collections.Generic.List<int> { 4, 3, 4, 5 },
-                VisitedValues = new System.Collections.Generic.List<VisitedValue>
-                   {
-                       new VisitedValue { Index = 1, Value = 3 },
-                       new VisitedValue { Index = 3, Value = 7 },
-                       new VisitedValue { Index = 5, Value = 8 }
-                   }
-            };
-        }
-
         public IActionResult Privacy()
         {
             return View();
