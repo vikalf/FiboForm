@@ -4,7 +4,7 @@ using Grpc.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Fibo.Service.Implementation
@@ -23,6 +23,26 @@ namespace Fibo.Service.Implementation
             _fiboComponent = scoped.ServiceProvider.GetRequiredService<IFiboComponent>();
         }
 
+        public async override Task<VisitedValuesReply> GetVisitedValues(EmptyRequest request, ServerCallContext context)
+        {
+            try
+            {
+                var result = await _fiboComponent.GetVisitedValues();
+                var reply = new VisitedValuesReply();
+                reply.Indexes.AddRange(result.Indexes.ToList());
+
+                foreach (var item in result.VisitedValues)
+                    reply.VisitedValues.Add(new VisitedValue { Index = item.Key, Value = item.Value });
+
+                return reply;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Grpc Error GetVisitedIndexes()");
+                throw new RpcException(new Status(StatusCode.Internal, "Grpc Error GetVisitedIndexes()"));
+            }
+        }
+
         public async override Task<FiboNumberByIndexReply> GetFiboNumberByIndex(FiboNumberByIndexRequest request, ServerCallContext context)
         {
             if (request.Index < 0)
@@ -33,13 +53,9 @@ namespace Fibo.Service.Implementation
 
             try
             {
-                var result = await _fiboComponent.GetFiboNumeralByIndex(request.Index);
-                var reply = new FiboNumberByIndexReply { FiboNumber = result.FiboNumeral };
-
-                foreach (var item in result.VisitedValues)
-                {
-                    reply.VisitedValues.Add(new VisitedValue { Index = item.Key, Value = item.Value });
-                }
+                await Task.Delay(1);
+                var result = _fiboComponent.GetFiboNumeralByIndex(request.Index);
+                var reply = new FiboNumberByIndexReply { FiboNumber = result };
 
                 return reply;
 
@@ -51,20 +67,41 @@ namespace Fibo.Service.Implementation
             }
         }
 
-        public async override Task<VisitedIndexesReply> GetVisitedIndexes(EmptyRequest request, ServerCallContext context)
+        public async override Task<SaveFiboNumberReply> SaveFiboIndexPostgres(SaveFiboIndexPostgresRequest request, ServerCallContext context)
         {
+
+            if (request.FiboIndex < 0)
+                throw new RpcException(new Status(StatusCode.InvalidArgument, "Index must be greater than zero"));
+
             try
             {
-                List<int> result = await _fiboComponent.GetVisitedIndexes();
-                var reply = new VisitedIndexesReply();
-                reply.Values.AddRange(result);
-
-                return reply;
+                bool result = await _fiboComponent.SaveFiboIndexPostgres(request.FiboIndex);
+                return new SaveFiboNumberReply { Success = result };
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Grpc Error GetVisitedIndexes()");
-                throw new RpcException(new Status(StatusCode.Internal, "Grpc Error GetVisitedIndexes()"));
+                _logger.LogError(ex, "Grpc Error SaveFiboIndexPostgres({FiboIndex})", request.FiboIndex);
+                throw new RpcException(new Status(StatusCode.Internal, "Grpc Error SaveFiboIndexPostgres({FiboIndex})"));
+            }
+        }
+
+        public async override Task<SaveFiboNumberReply> SaveFiboNumberRedis(VisitedValue request, ServerCallContext context)
+        {
+            if (request.Index <= 0)
+                throw new RpcException(new Status(StatusCode.InvalidArgument, "Index must be greater than zero"));
+
+            if (request.Value <= 0)
+                throw new RpcException(new Status(StatusCode.InvalidArgument, "Value must be greater than zero"));
+
+            try
+            {
+                bool result = await _fiboComponent.SaveFiboValueRedis(request.Index, request.Value);
+                return new SaveFiboNumberReply { Success = result };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Grpc Error SaveFiboIndexPostgres({Index}, {Value})", request.Index, request.Value);
+                throw new RpcException(new Status(StatusCode.Internal, "Grpc Error SaveFiboIndexPostgres({Index}, {Value})"));
             }
         }
 

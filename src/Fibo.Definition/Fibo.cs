@@ -25,23 +25,30 @@ namespace Fibo.Definition {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CgpmaWJvLnByb3RvIikKGEZpYm9OdW1iZXJCeUluZGV4UmVxdWVzdBINCgVp",
-            "bmRleBgBIAEoBSJSChZGaWJvTnVtYmVyQnlJbmRleFJlcGx5EhIKCmZpYm9O",
-            "dW1iZXIYASABKAUSJAoNdmlzaXRlZFZhbHVlcxgCIAMoCzINLlZpc2l0ZWRW",
-            "YWx1ZSIsCgxWaXNpdGVkVmFsdWUSDQoFaW5kZXgYASABKAUSDQoFdmFsdWUY",
-            "AiABKAUiDgoMRW1wdHlSZXF1ZXN0IiUKE1Zpc2l0ZWRJbmRleGVzUmVwbHkS",
-            "DgoGdmFsdWVzGAEgAygFMpABCgRGaWJvEkwKFEdldEZpYm9OdW1iZXJCeUlu",
-            "ZGV4EhkuRmlib051bWJlckJ5SW5kZXhSZXF1ZXN0GhcuRmlib051bWJlckJ5",
-            "SW5kZXhSZXBseSIAEjoKEUdldFZpc2l0ZWRJbmRleGVzEg0uRW1wdHlSZXF1",
-            "ZXN0GhQuVmlzaXRlZEluZGV4ZXNSZXBseSIAQhKqAg9GaWJvLkRlZmluaXRp",
-            "b25iBnByb3RvMw=="));
+            "bmRleBgBIAEoBSIsChZGaWJvTnVtYmVyQnlJbmRleFJlcGx5EhIKCmZpYm9O",
+            "dW1iZXIYASABKAUiMQocU2F2ZUZpYm9JbmRleFBvc3RncmVzUmVxdWVzdBIR",
+            "CglmaWJvSW5kZXgYASABKAUiLAoMVmlzaXRlZFZhbHVlEg0KBWluZGV4GAEg",
+            "ASgFEg0KBXZhbHVlGAIgASgFIg4KDEVtcHR5UmVxdWVzdCImChNTYXZlRmli",
+            "b051bWJlclJlcGx5Eg8KB3N1Y2Nlc3MYASABKAgiSwoSVmlzaXRlZFZhbHVl",
+            "c1JlcGx5Eg8KB2luZGV4ZXMYASADKAUSJAoNdmlzaXRlZFZhbHVlcxgCIAMo",
+            "CzINLlZpc2l0ZWRWYWx1ZTKcAgoERmlibxJMChRHZXRGaWJvTnVtYmVyQnlJ",
+            "bmRleBIZLkZpYm9OdW1iZXJCeUluZGV4UmVxdWVzdBoXLkZpYm9OdW1iZXJC",
+            "eUluZGV4UmVwbHkiABI4ChBHZXRWaXNpdGVkVmFsdWVzEg0uRW1wdHlSZXF1",
+            "ZXN0GhMuVmlzaXRlZFZhbHVlc1JlcGx5IgASPAoTU2F2ZUZpYm9OdW1iZXJS",
+            "ZWRpcxINLlZpc2l0ZWRWYWx1ZRoULlNhdmVGaWJvTnVtYmVyUmVwbHkiABJO",
+            "ChVTYXZlRmlib0luZGV4UG9zdGdyZXMSHS5TYXZlRmlib0luZGV4UG9zdGdy",
+            "ZXNSZXF1ZXN0GhQuU2F2ZUZpYm9OdW1iZXJSZXBseSIAQhKqAg9GaWJvLkRl",
+            "ZmluaXRpb25iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Fibo.Definition.FiboNumberByIndexRequest), global::Fibo.Definition.FiboNumberByIndexRequest.Parser, new[]{ "Index" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Fibo.Definition.FiboNumberByIndexReply), global::Fibo.Definition.FiboNumberByIndexReply.Parser, new[]{ "FiboNumber", "VisitedValues" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Fibo.Definition.FiboNumberByIndexReply), global::Fibo.Definition.FiboNumberByIndexReply.Parser, new[]{ "FiboNumber" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Fibo.Definition.SaveFiboIndexPostgresRequest), global::Fibo.Definition.SaveFiboIndexPostgresRequest.Parser, new[]{ "FiboIndex" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Fibo.Definition.VisitedValue), global::Fibo.Definition.VisitedValue.Parser, new[]{ "Index", "Value" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Fibo.Definition.EmptyRequest), global::Fibo.Definition.EmptyRequest.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Fibo.Definition.VisitedIndexesReply), global::Fibo.Definition.VisitedIndexesReply.Parser, new[]{ "Values" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Fibo.Definition.SaveFiboNumberReply), global::Fibo.Definition.SaveFiboNumberReply.Parser, new[]{ "Success" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Fibo.Definition.VisitedValuesReply), global::Fibo.Definition.VisitedValuesReply.Parser, new[]{ "Indexes", "VisitedValues" }, null, null, null)
           }));
     }
     #endregion
@@ -203,7 +210,6 @@ namespace Fibo.Definition {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public FiboNumberByIndexReply(FiboNumberByIndexReply other) : this() {
       fiboNumber_ = other.fiboNumber_;
-      visitedValues_ = other.visitedValues_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -223,16 +229,6 @@ namespace Fibo.Definition {
       }
     }
 
-    /// <summary>Field number for the "visitedValues" field.</summary>
-    public const int VisitedValuesFieldNumber = 2;
-    private static readonly pb::FieldCodec<global::Fibo.Definition.VisitedValue> _repeated_visitedValues_codec
-        = pb::FieldCodec.ForMessage(18, global::Fibo.Definition.VisitedValue.Parser);
-    private readonly pbc::RepeatedField<global::Fibo.Definition.VisitedValue> visitedValues_ = new pbc::RepeatedField<global::Fibo.Definition.VisitedValue>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Fibo.Definition.VisitedValue> VisitedValues {
-      get { return visitedValues_; }
-    }
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as FiboNumberByIndexReply);
@@ -247,7 +243,6 @@ namespace Fibo.Definition {
         return true;
       }
       if (FiboNumber != other.FiboNumber) return false;
-      if(!visitedValues_.Equals(other.visitedValues_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -255,7 +250,6 @@ namespace Fibo.Definition {
     public override int GetHashCode() {
       int hash = 1;
       if (FiboNumber != 0) hash ^= FiboNumber.GetHashCode();
-      hash ^= visitedValues_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -273,7 +267,6 @@ namespace Fibo.Definition {
         output.WriteRawTag(8);
         output.WriteInt32(FiboNumber);
       }
-      visitedValues_.WriteTo(output, _repeated_visitedValues_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -285,7 +278,6 @@ namespace Fibo.Definition {
       if (FiboNumber != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(FiboNumber);
       }
-      size += visitedValues_.CalculateSize(_repeated_visitedValues_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -300,7 +292,6 @@ namespace Fibo.Definition {
       if (other.FiboNumber != 0) {
         FiboNumber = other.FiboNumber;
       }
-      visitedValues_.Add(other.visitedValues_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -316,8 +307,133 @@ namespace Fibo.Definition {
             FiboNumber = input.ReadInt32();
             break;
           }
-          case 18: {
-            visitedValues_.AddEntriesFrom(input, _repeated_visitedValues_codec);
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class SaveFiboIndexPostgresRequest : pb::IMessage<SaveFiboIndexPostgresRequest> {
+    private static readonly pb::MessageParser<SaveFiboIndexPostgresRequest> _parser = new pb::MessageParser<SaveFiboIndexPostgresRequest>(() => new SaveFiboIndexPostgresRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SaveFiboIndexPostgresRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Fibo.Definition.FiboReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SaveFiboIndexPostgresRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SaveFiboIndexPostgresRequest(SaveFiboIndexPostgresRequest other) : this() {
+      fiboIndex_ = other.fiboIndex_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SaveFiboIndexPostgresRequest Clone() {
+      return new SaveFiboIndexPostgresRequest(this);
+    }
+
+    /// <summary>Field number for the "fiboIndex" field.</summary>
+    public const int FiboIndexFieldNumber = 1;
+    private int fiboIndex_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int FiboIndex {
+      get { return fiboIndex_; }
+      set {
+        fiboIndex_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SaveFiboIndexPostgresRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SaveFiboIndexPostgresRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (FiboIndex != other.FiboIndex) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (FiboIndex != 0) hash ^= FiboIndex.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (FiboIndex != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(FiboIndex);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (FiboIndex != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(FiboIndex);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SaveFiboIndexPostgresRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.FiboIndex != 0) {
+        FiboIndex = other.FiboIndex;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            FiboIndex = input.ReadInt32();
             break;
           }
         }
@@ -334,7 +450,7 @@ namespace Fibo.Definition {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Fibo.Definition.FiboReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Fibo.Definition.FiboReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -491,7 +607,7 @@ namespace Fibo.Definition {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Fibo.Definition.FiboReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Fibo.Definition.FiboReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -584,15 +700,15 @@ namespace Fibo.Definition {
 
   }
 
-  public sealed partial class VisitedIndexesReply : pb::IMessage<VisitedIndexesReply> {
-    private static readonly pb::MessageParser<VisitedIndexesReply> _parser = new pb::MessageParser<VisitedIndexesReply>(() => new VisitedIndexesReply());
+  public sealed partial class SaveFiboNumberReply : pb::IMessage<SaveFiboNumberReply> {
+    private static readonly pb::MessageParser<SaveFiboNumberReply> _parser = new pb::MessageParser<SaveFiboNumberReply>(() => new SaveFiboNumberReply());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<VisitedIndexesReply> Parser { get { return _parser; } }
+    public static pb::MessageParser<SaveFiboNumberReply> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Fibo.Definition.FiboReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Fibo.Definition.FiboReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -601,54 +717,55 @@ namespace Fibo.Definition {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public VisitedIndexesReply() {
+    public SaveFiboNumberReply() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public VisitedIndexesReply(VisitedIndexesReply other) : this() {
-      values_ = other.values_.Clone();
+    public SaveFiboNumberReply(SaveFiboNumberReply other) : this() {
+      success_ = other.success_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public VisitedIndexesReply Clone() {
-      return new VisitedIndexesReply(this);
+    public SaveFiboNumberReply Clone() {
+      return new SaveFiboNumberReply(this);
     }
 
-    /// <summary>Field number for the "values" field.</summary>
-    public const int ValuesFieldNumber = 1;
-    private static readonly pb::FieldCodec<int> _repeated_values_codec
-        = pb::FieldCodec.ForInt32(10);
-    private readonly pbc::RepeatedField<int> values_ = new pbc::RepeatedField<int>();
+    /// <summary>Field number for the "success" field.</summary>
+    public const int SuccessFieldNumber = 1;
+    private bool success_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<int> Values {
-      get { return values_; }
+    public bool Success {
+      get { return success_; }
+      set {
+        success_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as VisitedIndexesReply);
+      return Equals(other as SaveFiboNumberReply);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(VisitedIndexesReply other) {
+    public bool Equals(SaveFiboNumberReply other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if(!values_.Equals(other.values_)) return false;
+      if (Success != other.Success) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      hash ^= values_.GetHashCode();
+      if (Success != false) hash ^= Success.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -662,7 +779,10 @@ namespace Fibo.Definition {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      values_.WriteTo(output, _repeated_values_codec);
+      if (Success != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Success);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -671,7 +791,9 @@ namespace Fibo.Definition {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += values_.CalculateSize(_repeated_values_codec);
+      if (Success != false) {
+        size += 1 + 1;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -679,11 +801,150 @@ namespace Fibo.Definition {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(VisitedIndexesReply other) {
+    public void MergeFrom(SaveFiboNumberReply other) {
       if (other == null) {
         return;
       }
-      values_.Add(other.values_);
+      if (other.Success != false) {
+        Success = other.Success;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Success = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class VisitedValuesReply : pb::IMessage<VisitedValuesReply> {
+    private static readonly pb::MessageParser<VisitedValuesReply> _parser = new pb::MessageParser<VisitedValuesReply>(() => new VisitedValuesReply());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<VisitedValuesReply> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Fibo.Definition.FiboReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public VisitedValuesReply() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public VisitedValuesReply(VisitedValuesReply other) : this() {
+      indexes_ = other.indexes_.Clone();
+      visitedValues_ = other.visitedValues_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public VisitedValuesReply Clone() {
+      return new VisitedValuesReply(this);
+    }
+
+    /// <summary>Field number for the "indexes" field.</summary>
+    public const int IndexesFieldNumber = 1;
+    private static readonly pb::FieldCodec<int> _repeated_indexes_codec
+        = pb::FieldCodec.ForInt32(10);
+    private readonly pbc::RepeatedField<int> indexes_ = new pbc::RepeatedField<int>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<int> Indexes {
+      get { return indexes_; }
+    }
+
+    /// <summary>Field number for the "visitedValues" field.</summary>
+    public const int VisitedValuesFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::Fibo.Definition.VisitedValue> _repeated_visitedValues_codec
+        = pb::FieldCodec.ForMessage(18, global::Fibo.Definition.VisitedValue.Parser);
+    private readonly pbc::RepeatedField<global::Fibo.Definition.VisitedValue> visitedValues_ = new pbc::RepeatedField<global::Fibo.Definition.VisitedValue>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Fibo.Definition.VisitedValue> VisitedValues {
+      get { return visitedValues_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as VisitedValuesReply);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(VisitedValuesReply other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!indexes_.Equals(other.indexes_)) return false;
+      if(!visitedValues_.Equals(other.visitedValues_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= indexes_.GetHashCode();
+      hash ^= visitedValues_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      indexes_.WriteTo(output, _repeated_indexes_codec);
+      visitedValues_.WriteTo(output, _repeated_visitedValues_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += indexes_.CalculateSize(_repeated_indexes_codec);
+      size += visitedValues_.CalculateSize(_repeated_visitedValues_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(VisitedValuesReply other) {
+      if (other == null) {
+        return;
+      }
+      indexes_.Add(other.indexes_);
+      visitedValues_.Add(other.visitedValues_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -697,7 +958,11 @@ namespace Fibo.Definition {
             break;
           case 10:
           case 8: {
-            values_.AddEntriesFrom(input, _repeated_values_codec);
+            indexes_.AddEntriesFrom(input, _repeated_indexes_codec);
+            break;
+          }
+          case 18: {
+            visitedValues_.AddEntriesFrom(input, _repeated_visitedValues_codec);
             break;
           }
         }

@@ -23,26 +23,38 @@ namespace Fibo.Service.Components.Implementation
             _fiboRepository = fiboRepository;
         }
 
-        public async Task<FiboResultModel> GetFiboNumeralByIndex(int index)
+        public int GetFiboNumeralByIndex(int index)
         {
-            await Task.Delay(1);
             List<int> fibonacciList = GetFibonacciList(index);
             var fiboNumeral = fibonacciList[index];
-            var result = new FiboResultModel { FiboNumeral = fiboNumeral };
-            result.VisitedValues = await GetVisitedValuesFromRedis(index, fiboNumeral);
+            return fiboNumeral;
+        }
 
-            await _fiboRepository.CreateVisitValuesTable();
-            await _fiboRepository.InsertValue(index);
+        public async Task<VisitedValuesModel> GetVisitedValues()
+        {
+            VisitedValuesModel result = new VisitedValuesModel();
+            result.Indexes = await _fiboRepository.GetVisitedValuesFromDb();
+            result.VisitedValues = await GetVisitedValuesFromRedis();
 
             return result;
+
         }
 
-        public async Task<List<int>> GetVisitedIndexes()
+        private async Task<Dictionary<int, int>> GetVisitedValuesFromRedis()
         {
-            return await _fiboRepository.GetVisitedValuesFromDb();
+            var cacheKey = "fibo_visited_values";
+            var visitedValuesBytes = await _distributedCache.GetAsync(cacheKey);
+            var values = new Dictionary<int, int>();
+            if (visitedValuesBytes != null)
+            {
+                var valuesBytes = await _distributedCache.GetAsync(cacheKey);
+                values = Helpers.FromByteArray<Dictionary<int, int>>(valuesBytes);
+            }
+
+            return values;
         }
 
-        private async Task<Dictionary<int, int>> GetVisitedValuesFromRedis(int index, int fiboNumeral)
+        public async Task<bool> SaveFiboValueRedis(int index, int fiboNumeral)
         {
             var cacheKey = "fibo_visited_values";
             var visitedValuesBytes = await _distributedCache.GetAsync(cacheKey);
@@ -67,9 +79,16 @@ namespace Fibo.Service.Components.Implementation
                 }
             }
 
-            return values;
+            return true;
 
         }
+
+        public async Task<bool> SaveFiboIndexPostgres(int fiboIndex)
+        {
+            await _fiboRepository.InsertValue(fiboIndex);
+            return true;
+        }
+
 
         private List<int> GetFibonacciList(int index)
         {

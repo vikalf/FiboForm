@@ -18,7 +18,10 @@ namespace Fibo.Definition {
     static readonly grpc::Marshaller<global::Fibo.Definition.FiboNumberByIndexRequest> __Marshaller_FiboNumberByIndexRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Fibo.Definition.FiboNumberByIndexRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Fibo.Definition.FiboNumberByIndexReply> __Marshaller_FiboNumberByIndexReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Fibo.Definition.FiboNumberByIndexReply.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Fibo.Definition.EmptyRequest> __Marshaller_EmptyRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Fibo.Definition.EmptyRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Fibo.Definition.VisitedIndexesReply> __Marshaller_VisitedIndexesReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Fibo.Definition.VisitedIndexesReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Fibo.Definition.VisitedValuesReply> __Marshaller_VisitedValuesReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Fibo.Definition.VisitedValuesReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Fibo.Definition.VisitedValue> __Marshaller_VisitedValue = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Fibo.Definition.VisitedValue.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Fibo.Definition.SaveFiboNumberReply> __Marshaller_SaveFiboNumberReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Fibo.Definition.SaveFiboNumberReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Fibo.Definition.SaveFiboIndexPostgresRequest> __Marshaller_SaveFiboIndexPostgresRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Fibo.Definition.SaveFiboIndexPostgresRequest.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Fibo.Definition.FiboNumberByIndexRequest, global::Fibo.Definition.FiboNumberByIndexReply> __Method_GetFiboNumberByIndex = new grpc::Method<global::Fibo.Definition.FiboNumberByIndexRequest, global::Fibo.Definition.FiboNumberByIndexReply>(
         grpc::MethodType.Unary,
@@ -27,12 +30,26 @@ namespace Fibo.Definition {
         __Marshaller_FiboNumberByIndexRequest,
         __Marshaller_FiboNumberByIndexReply);
 
-    static readonly grpc::Method<global::Fibo.Definition.EmptyRequest, global::Fibo.Definition.VisitedIndexesReply> __Method_GetVisitedIndexes = new grpc::Method<global::Fibo.Definition.EmptyRequest, global::Fibo.Definition.VisitedIndexesReply>(
+    static readonly grpc::Method<global::Fibo.Definition.EmptyRequest, global::Fibo.Definition.VisitedValuesReply> __Method_GetVisitedValues = new grpc::Method<global::Fibo.Definition.EmptyRequest, global::Fibo.Definition.VisitedValuesReply>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "GetVisitedIndexes",
+        "GetVisitedValues",
         __Marshaller_EmptyRequest,
-        __Marshaller_VisitedIndexesReply);
+        __Marshaller_VisitedValuesReply);
+
+    static readonly grpc::Method<global::Fibo.Definition.VisitedValue, global::Fibo.Definition.SaveFiboNumberReply> __Method_SaveFiboNumberRedis = new grpc::Method<global::Fibo.Definition.VisitedValue, global::Fibo.Definition.SaveFiboNumberReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "SaveFiboNumberRedis",
+        __Marshaller_VisitedValue,
+        __Marshaller_SaveFiboNumberReply);
+
+    static readonly grpc::Method<global::Fibo.Definition.SaveFiboIndexPostgresRequest, global::Fibo.Definition.SaveFiboNumberReply> __Method_SaveFiboIndexPostgres = new grpc::Method<global::Fibo.Definition.SaveFiboIndexPostgresRequest, global::Fibo.Definition.SaveFiboNumberReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "SaveFiboIndexPostgres",
+        __Marshaller_SaveFiboIndexPostgresRequest,
+        __Marshaller_SaveFiboNumberReply);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -55,7 +72,17 @@ namespace Fibo.Definition {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::Fibo.Definition.VisitedIndexesReply> GetVisitedIndexes(global::Fibo.Definition.EmptyRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Fibo.Definition.VisitedValuesReply> GetVisitedValues(global::Fibo.Definition.EmptyRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Fibo.Definition.SaveFiboNumberReply> SaveFiboNumberRedis(global::Fibo.Definition.VisitedValue request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Fibo.Definition.SaveFiboNumberReply> SaveFiboIndexPostgres(global::Fibo.Definition.SaveFiboIndexPostgresRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -129,21 +156,53 @@ namespace Fibo.Definition {
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetFiboNumberByIndex, null, options, request);
       }
-      public virtual global::Fibo.Definition.VisitedIndexesReply GetVisitedIndexes(global::Fibo.Definition.EmptyRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Fibo.Definition.VisitedValuesReply GetVisitedValues(global::Fibo.Definition.EmptyRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return GetVisitedIndexes(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return GetVisitedValues(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Fibo.Definition.VisitedIndexesReply GetVisitedIndexes(global::Fibo.Definition.EmptyRequest request, grpc::CallOptions options)
+      public virtual global::Fibo.Definition.VisitedValuesReply GetVisitedValues(global::Fibo.Definition.EmptyRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_GetVisitedIndexes, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_GetVisitedValues, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Fibo.Definition.VisitedIndexesReply> GetVisitedIndexesAsync(global::Fibo.Definition.EmptyRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Fibo.Definition.VisitedValuesReply> GetVisitedValuesAsync(global::Fibo.Definition.EmptyRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return GetVisitedIndexesAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return GetVisitedValuesAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Fibo.Definition.VisitedIndexesReply> GetVisitedIndexesAsync(global::Fibo.Definition.EmptyRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Fibo.Definition.VisitedValuesReply> GetVisitedValuesAsync(global::Fibo.Definition.EmptyRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_GetVisitedIndexes, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_GetVisitedValues, null, options, request);
+      }
+      public virtual global::Fibo.Definition.SaveFiboNumberReply SaveFiboNumberRedis(global::Fibo.Definition.VisitedValue request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SaveFiboNumberRedis(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Fibo.Definition.SaveFiboNumberReply SaveFiboNumberRedis(global::Fibo.Definition.VisitedValue request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_SaveFiboNumberRedis, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Fibo.Definition.SaveFiboNumberReply> SaveFiboNumberRedisAsync(global::Fibo.Definition.VisitedValue request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SaveFiboNumberRedisAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Fibo.Definition.SaveFiboNumberReply> SaveFiboNumberRedisAsync(global::Fibo.Definition.VisitedValue request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_SaveFiboNumberRedis, null, options, request);
+      }
+      public virtual global::Fibo.Definition.SaveFiboNumberReply SaveFiboIndexPostgres(global::Fibo.Definition.SaveFiboIndexPostgresRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SaveFiboIndexPostgres(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Fibo.Definition.SaveFiboNumberReply SaveFiboIndexPostgres(global::Fibo.Definition.SaveFiboIndexPostgresRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_SaveFiboIndexPostgres, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Fibo.Definition.SaveFiboNumberReply> SaveFiboIndexPostgresAsync(global::Fibo.Definition.SaveFiboIndexPostgresRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SaveFiboIndexPostgresAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Fibo.Definition.SaveFiboNumberReply> SaveFiboIndexPostgresAsync(global::Fibo.Definition.SaveFiboIndexPostgresRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_SaveFiboIndexPostgres, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override FiboClient NewInstance(ClientBaseConfiguration configuration)
@@ -158,7 +217,9 @@ namespace Fibo.Definition {
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_GetFiboNumberByIndex, serviceImpl.GetFiboNumberByIndex)
-          .AddMethod(__Method_GetVisitedIndexes, serviceImpl.GetVisitedIndexes).Build();
+          .AddMethod(__Method_GetVisitedValues, serviceImpl.GetVisitedValues)
+          .AddMethod(__Method_SaveFiboNumberRedis, serviceImpl.SaveFiboNumberRedis)
+          .AddMethod(__Method_SaveFiboIndexPostgres, serviceImpl.SaveFiboIndexPostgres).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -168,7 +229,9 @@ namespace Fibo.Definition {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, FiboBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_GetFiboNumberByIndex, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Fibo.Definition.FiboNumberByIndexRequest, global::Fibo.Definition.FiboNumberByIndexReply>(serviceImpl.GetFiboNumberByIndex));
-      serviceBinder.AddMethod(__Method_GetVisitedIndexes, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Fibo.Definition.EmptyRequest, global::Fibo.Definition.VisitedIndexesReply>(serviceImpl.GetVisitedIndexes));
+      serviceBinder.AddMethod(__Method_GetVisitedValues, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Fibo.Definition.EmptyRequest, global::Fibo.Definition.VisitedValuesReply>(serviceImpl.GetVisitedValues));
+      serviceBinder.AddMethod(__Method_SaveFiboNumberRedis, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Fibo.Definition.VisitedValue, global::Fibo.Definition.SaveFiboNumberReply>(serviceImpl.SaveFiboNumberRedis));
+      serviceBinder.AddMethod(__Method_SaveFiboIndexPostgres, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Fibo.Definition.SaveFiboIndexPostgresRequest, global::Fibo.Definition.SaveFiboNumberReply>(serviceImpl.SaveFiboIndexPostgres));
     }
 
   }

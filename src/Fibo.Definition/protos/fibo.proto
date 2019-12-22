@@ -7,7 +7,11 @@ service Fibo {
   // Returns the fibonacci numeral by a given index
   rpc GetFiboNumberByIndex(FiboNumberByIndexRequest) returns (FiboNumberByIndexReply) {}
 
-  rpc GetVisitedIndexes(EmptyRequest) returns (VisitedIndexesReply) {}
+  rpc GetVisitedValues(EmptyRequest) returns (VisitedValuesReply) {}
+
+  rpc SaveFiboNumberRedis(VisitedValue) returns (SaveFiboNumberReply) {}
+
+  rpc SaveFiboIndexPostgres(SaveFiboIndexPostgresRequest) returns (SaveFiboNumberReply) {}
 
 }
 
@@ -17,7 +21,10 @@ message FiboNumberByIndexRequest {
 
 message FiboNumberByIndexReply {
 	int32 fiboNumber = 1;
-	repeated VisitedValue visitedValues = 2;
+}
+
+message SaveFiboIndexPostgresRequest {
+	int32 fiboIndex = 1;
 }
 
 message VisitedValue {
@@ -27,7 +34,12 @@ message VisitedValue {
 
 message EmptyRequest {}
 
-message VisitedIndexesReply {
-	repeated int32 values = 1;
+message SaveFiboNumberReply {
+	bool success = 1;
+}
+
+message VisitedValuesReply {
+	repeated int32 indexes = 1;
+	repeated VisitedValue visitedValues = 2;
 }
 

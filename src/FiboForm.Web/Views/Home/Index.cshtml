@@ -1,8 +1,88 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model FiboModel
+@{
+    ViewData["Title"] = "Fibonacci Sequence Searcg";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="text-center mb-3">
+            <h1 class="display-4">Fib Calculator</h1>
+            <p>Search a Fibonacci Number from the Index</p>
+        </div>
+    </div>
 </div>
+
+<div class="row mb-5">
+    <form asp-route="Index" class="col-5 m-auto">
+        <div class="form-row">
+            <div class="col-10">
+                <input type="text" class="form-control mb-2" id="txtIndex" placeholder="Enter your Index" asp-for="Index">
+            </div>
+            <div class="col-2">
+                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="row mb-3">
+        <div class="col-5 m-auto text-center alert alert-danger">
+            <h5>@Model.ErrorMessage</h5>
+        </div>
+    </div>
+}
+
+@if (Model != null)
+{
+
+    @if (Model.FiboNumber != null)
+    {
+        <div class="row mb-3">
+            <div class="col-5 m-auto text-center">
+                <h4>Your Fibonacci Number Is:</h4>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-5 m-auto text-center">
+                <h4>@Model.FiboNumber</h4>
+            </div>
+        </div>
+    }
+
+    @if (Model.VisitedIndexes != null && Model.VisitedIndexes.Any())
+    {
+        <div class="row mb-3">
+            <div class="col-5 m-auto text-center">
+                <h4>Indicies I Have Seen:</h4>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-5 m-auto text-center alert alert-primary">
+                <h5>@string.Join(",", Model.VisitedIndexes)</h5>
+            </div>
+        </div>
+    }
+
+
+    @if (Model.VisitedValues != null && Model.VisitedValues.Any())
+    {
+        <div class="row mb-3">
+            <div class="col-5 m-auto text-center">
+                <h4>Calculated Values:</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-5 m-auto text-center alert alert-info">
+                @foreach (var item in Model.VisitedValues)
+                {
+                    <h5>For Index @item.Index, I Calculated @item.Value </h5>
+                }
+            </div>
+        </div>
+    }
+}
