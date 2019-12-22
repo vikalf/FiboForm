@@ -1,13 +1,12 @@
 ﻿using Fibo.Service.Components.Definition;
 using Fibo.Service.Models;
+using Fibo.Service.Repositories.Definition;
 using FiboForm.Common;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Linq;
-using Fibo.Service.Repositories.Definition;
+using System.Threading.Tasks;
 
 namespace Fibo.Service.Components.Implementation
 {
@@ -29,7 +28,7 @@ namespace Fibo.Service.Components.Implementation
             await Task.Delay(1);
             List<int> fibonacciList = GetFibonacciList(index);
             var fiboNumeral = fibonacciList[index];
-            var result = new FiboResultModel {  FiboNumeral = fiboNumeral };
+            var result = new FiboResultModel { FiboNumeral = fiboNumeral };
             result.VisitedValues = await GetVisitedValuesFromRedis(index, fiboNumeral);
 
             await _fiboRepository.CreateVisitValuesTable();
@@ -84,7 +83,7 @@ namespace Fibo.Service.Components.Implementation
                     break;
                 else if (count < 2)
                     result.Add(1);
-                else 
+                else
                 {
                     var a = result[count - 2];
                     var b = result[count - 1];
@@ -96,6 +95,6 @@ namespace Fibo.Service.Components.Implementation
 
         }
 
-        
+
     }
 }

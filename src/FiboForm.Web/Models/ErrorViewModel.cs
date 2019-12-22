@@ -1,5 +1,3 @@
-using System;
-
 namespace FiboForm.Web.Models
 {
     public class ErrorViewModel
