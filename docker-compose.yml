@@ -1,0 +1,35 @@
+version: '3'
+services:
+  redis-server:
+    image: 'redis'
+    ports:
+      - "6379:6379"
+  postgres-server:
+    image: 'postgres:latest'
+    environment:
+      - POSTGRES_PASSWORD=password01
+      - POSTGRES_USER=superuser
+      - POSTGRES_DB=maindb
+    ports:
+      - "5432:5432"
+  fibo-service:
+    restart: always
+    build:
+      dockerfile: Dockerfile.FiboService
+      context: .
+    ports:
+      - "50051:50051"
+  fiboform-api:
+    restart: always
+    build: 
+      dockerfile: Dockerfile.FiboFormApi
+      context: .
+    ports:
+      - "5001:5001"
+  fiboform-web:
+    restart: always
+    build:
+      dockerfile: Dockerfile.FiboFormWeb
+      context: .
+    ports:
+      - "5000:5000"

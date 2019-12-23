@@ -6,6 +6,12 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B3154F37-F13D-4B3D-A4B1-1F7B7067DEC2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployment", "deployment", "{9BDD75DB-0CA9-40A4-A7B8-E474C9F2A2BF}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		Dockerfile.FiboFormApi = Dockerfile.FiboFormApi
+		Dockerfile.FiboFormWeb = Dockerfile.FiboFormWeb
+		Dockerfile.FiboService = Dockerfile.FiboService
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiboForm.Web", "src\FiboForm.Web\FiboForm.Web.csproj", "{7873CEDE-445B-4449-BD86-CB843A3D5EDE}"
 EndProject
@@ -21,9 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{22233577-1A3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{13303FE2-5223-475E-8E87-1CF8120F0DFC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{7C0E81A8-B5F8-4FC8-AB2A-2B3BEC3CEB05}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiboForm.Common", "src\FiboForm.Common\FiboForm.Common.csproj", "{DA77766A-3916-406D-B929-A527D036B476}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiboForm.Common", "src\FiboForm.Common\FiboForm.Common.csproj", "{DA77766A-3916-406D-B929-A527D036B476}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,8 +67,7 @@ Global
 		{F28CD4D5-599B-4623-A0D9-BE4502BE6024} = {B3154F37-F13D-4B3D-A4B1-1F7B7067DEC2}
 		{22233577-1A37-4E48-AA97-DD972612713F} = {B3154F37-F13D-4B3D-A4B1-1F7B7067DEC2}
 		{13303FE2-5223-475E-8E87-1CF8120F0DFC} = {B3154F37-F13D-4B3D-A4B1-1F7B7067DEC2}
-		{7C0E81A8-B5F8-4FC8-AB2A-2B3BEC3CEB05} = {B3154F37-F13D-4B3D-A4B1-1F7B7067DEC2}
-		{DA77766A-3916-406D-B929-A527D036B476} = {7C0E81A8-B5F8-4FC8-AB2A-2B3BEC3CEB05}
+		{DA77766A-3916-406D-B929-A527D036B476} = {B3154F37-F13D-4B3D-A4B1-1F7B7067DEC2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DF151166-8D6C-445A-AED7-96CC28453D31}
