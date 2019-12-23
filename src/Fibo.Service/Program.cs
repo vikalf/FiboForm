@@ -44,8 +44,6 @@ namespace Fibo.Service
 
             var provider = serviceProvider.BuildServiceProvider();
 
-            SetupPostgres(provider);
-
             Server server = new Server
             {
                 Services = {
@@ -62,13 +60,6 @@ namespace Fibo.Service
 
             server.ShutdownAsync().Wait();
 
-        }
-
-        private static void SetupPostgres(ServiceProvider provider)
-        {
-            var scope = provider.CreateScope();
-            var repo = scope.ServiceProvider.GetRequiredService<IFiboRepository>();
-            Task.Run(async () => { await repo.CreateVisitValuesTable(); });
         }
 
         private static void SetConfiguration()

@@ -2,20 +2,15 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
-WORKDIR .
-COPY ["src/Fibo.Definition/Fibo.Definition.csproj", "src/Fibo.Definition/"]
-COPY ["src/FiboForm.Common/FiboForm.Common.csproj", "src/FiboForm.Common/"]
-COPY ["src/FiboForm.Api/FiboForm.Api.csproj", "src/FiboForm.Api/"]
-RUN dotnet restore "src/FiboForm.Api/FiboForm.Api.csproj"
+WORKDIR /src
 COPY . .
 WORKDIR "/src/FiboForm.Api"
-RUN dotnet build "FiboForm.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "FiboForm.Api.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-EXPOSE 5001
+EXPOSE 80
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "FiboForm.Api.dll"]

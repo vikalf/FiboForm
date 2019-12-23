@@ -19,17 +19,31 @@ services:
       context: .
     ports:
       - "50051:50051"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - REDIS_HOST=192.168.99.100:6379
+      - PG_SERVER=192.168.99.100
+      - PG_PORT=5432
+      - PG_DATABASE=maindb
+      - PG_USER=superuser
+      - PG_PASSWORD=password01
   fiboform-api:
     restart: always
     build: 
       dockerfile: Dockerfile.FiboFormApi
       context: .
     ports:
-      - "5001:5001"
+      - "81:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - GRPC_Proxy=192.168.99.100:50051
   fiboform-web:
     restart: always
     build:
       dockerfile: Dockerfile.FiboFormWeb
       context: .
     ports:
-      - "5000:5000"
+      - "80:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - API_URL=http://192.168.99.100:81

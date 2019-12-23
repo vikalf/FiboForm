@@ -2,19 +2,15 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
-WORKDIR .
-COPY ["src/FiboForm.Common/FiboForm.Common.csproj", "src/FiboForm.Common/"]
-COPY ["src/FiboForm.Web/FiboForm.Web.csproj", "src/FiboForm.Web/"]
-RUN dotnet restore "src/FiboForm.Web/FiboForm.Web.csproj"
+WORKDIR /src
 COPY . .
 WORKDIR "/src/FiboForm.Web"
-RUN dotnet build "FiboForm.Web.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "FiboForm.Web.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-EXPOSE 5000
+EXPOSE 80
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "FiboForm.Web.dll"]

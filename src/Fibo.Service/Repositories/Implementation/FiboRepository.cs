@@ -10,6 +10,11 @@ namespace Fibo.Service.Repositories.Implementation
 {
     public class FiboRepository : IFiboRepository
     {
+        public FiboRepository()
+        {
+            Task.Run(async () => { await CreateVisitValuesTable(); });
+        }
+
         public async Task CreateVisitValuesTable()
         {
             using (var cnn = GetConnection())
