@@ -12,7 +12,7 @@ namespace Fibo.Service.Repositories.Implementation
     {
         public FiboRepository()
         {
-            Task.Run(async () => { await CreateVisitValuesTable(); });
+            
         }
 
         public async Task CreateVisitValuesTable()
@@ -26,6 +26,7 @@ namespace Fibo.Service.Repositories.Implementation
 
         public async Task<List<int>> GetVisitedValuesFromDb()
         {
+            await CreateVisitValuesTable();
             using (var cnn = GetConnection())
             {
                 await cnn.OpenAsync();
@@ -36,6 +37,7 @@ namespace Fibo.Service.Repositories.Implementation
 
         public async Task<List<int>> InsertValue(int index)
         {
+            await CreateVisitValuesTable();
             using (var cnn = GetConnection())
             {
                 await cnn.OpenAsync();
