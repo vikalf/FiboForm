@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployment", "deployment", "{9BDD75DB-0CA9-40A4-A7B8-E474C9F2A2BF}"
 	ProjectSection(SolutionItems) = preProject
 		.dockerignore = .dockerignore
+		.travis.yml = .travis.yml
 		src\docker-compose.yml = src\docker-compose.yml
 		src\Dockerfile.FiboFormApi = src\Dockerfile.FiboFormApi
 		src\Dockerfile.FiboFormWeb = src\Dockerfile.FiboFormWeb

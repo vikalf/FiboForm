@@ -1,0 +1,16 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t vikalf/fiboform.service -f ./src/Dockerfile.FiboService ./src
+  - docker build -t vikalf/fiboform.api -f ./src/Dockerfile.FiboFormApi ./src
+  - docker build -t vikalf/fiboform.web -f ./src/Dockerfile.FiboFormWeb ./src
+
+script:
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  #Take those images and push them to docker hub
+  - docker push vikalf/fiboform.service
+  - docker push vikalf/fiboform.api
+  - docker push vikalf/fiboform.web
