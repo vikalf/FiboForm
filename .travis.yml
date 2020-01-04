@@ -14,3 +14,16 @@ script:
   - docker push vikalf/fiboform.service
   - docker push vikalf/fiboform.api
   - docker push vikalf/fiboform.web
+
+  deploy:
+    edge: true
+    provider: elasticbeanstalk
+    region: us-east-1
+    app: fiboform
+    env: FiboForm-env
+    bucket_name: elasticbeanstalk-us-east-1-238939573193
+    bucket_path: fiboform
+    on:
+      branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY

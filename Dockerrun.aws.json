@@ -1,0 +1,43 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "fiboform.service",
+      "image": "vikalf/fiboform.service",
+      "hostname": "fibo-service",
+      "essencial": true,
+      "portMappings": [
+        {
+          "hostPort": "50051",
+          "containerPort": "50051"
+        }
+      ]
+    },
+    {
+      "name": "fiboform.api",
+      "image": "vikalf/fiboform.api",
+      "hostname": "fibo-api",
+      "essencial": false,
+      "portMappings": [
+        {
+          "hostPort": "81",
+          "containerPort": "80"
+        }
+      ],
+      "links": [ "fiboform.service" ]
+    },
+    {
+      "name": "fiboform.web",
+      "image": "vikalf/fiboform.web",
+      "hostname": "fibo-web",
+      "essencial": false,
+      "portMappings": [
+        {
+          "hostPort": "80",
+          "containerPort": "80"
+        }
+      ],
+      "links": [ "fiboform.api" ]
+    }
+  ]
+}

@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployment", "deployment", 
 		src\Dockerfile.FiboFormApi = src\Dockerfile.FiboFormApi
 		src\Dockerfile.FiboFormWeb = src\Dockerfile.FiboFormWeb
 		src\Dockerfile.FiboService = src\Dockerfile.FiboService
+		Dockerrun.aws.json = Dockerrun.aws.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiboForm.Web", "src\FiboForm.Web\FiboForm.Web.csproj", "{7873CEDE-445B-4449-BD86-CB843A3D5EDE}"
