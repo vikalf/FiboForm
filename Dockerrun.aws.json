@@ -6,6 +6,7 @@
       "image": "vikalf/fiboform.service",
       "hostname": "fibo-service",
       "essencial": true,
+      "memory":  128,
       "portMappings": [
         {
           "hostPort": "50051",
@@ -18,6 +19,7 @@
       "image": "vikalf/fiboform.api",
       "hostname": "fibo-api",
       "essencial": false,
+      "memory": 128,
       "portMappings": [
         {
           "hostPort": "81",
@@ -31,6 +33,7 @@
       "image": "vikalf/fiboform.web",
       "hostname": "fibo-web",
       "essencial": false,
+      "memory": 128,
       "portMappings": [
         {
           "hostPort": "80",
