@@ -11,6 +11,18 @@
         "PG_USER": "superuser",
         "PG_PASSWORD": "password01"
       }
+    },
+    "Fibo.Service.Prod": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "REDIS_HOST": "fiboform-redis.alxkp8.0001.use1.cache.amazonaws.com:6379",
+        "PG_SERVER": "maindb.cvfbs6aalen6.us-east-1.rds.amazonaws.com",
+        "PG_PORT": "5432",
+        "PG_DATABASE": "maindb",
+        "PG_USER": "superuser",
+        "PG_PASSWORD": "password01"
+      }
     }
   }
 }

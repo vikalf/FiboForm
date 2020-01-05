@@ -7,8 +7,12 @@
       "applicationUrl": "http://localhost:5001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "GRPC_Proxy": "127.0.0.1:50051"
-
+        "REDIS_HOST" : "192.168.99.100:6379",
+        "PG_SERVER" : "192.168.99.100",
+        "PG_PORT" : "5432",
+        "PG_DATABASE" : "maindb",
+        "PG_USER" : "superuser",
+        "PG_PASSWORD" : "password01"
       }
     }
   }
