@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fiboweb-node-port
+spec:
+  type: NodePort
+  ports:
+    - ports: 3050
+      target: 3000
+      NodePort: 31515
+  selector:
+    component: web

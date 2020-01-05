@@ -26,6 +26,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{13
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiboForm.Common", "src\FiboForm.Common\FiboForm.Common.csproj", "{DA77766A-3916-406D-B929-A527D036B476}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{CD01510B-9B5D-40DE-A22A-751698C37D2B}"
+	ProjectSection(SolutionItems) = preProject
+		example-pod.yaml = example-pod.yaml
+		fiboweb-node-port.yaml = fiboweb-node-port.yaml
+		fiboweb-pod.yaml = fiboweb-pod.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fiboweb-pod
+  lables:
+    component: web
+spec:
+  containers:
+    - name: fiboweb
+      image: vikalf/fiboform.web
+      ports:
+        - containerPort: 3000

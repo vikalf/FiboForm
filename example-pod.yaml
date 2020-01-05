@@ -1,0 +1,190 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    checksum/config: 44deb59917e8d2f18cba71ee242387c6a40dfa390e61177da5ae870b632b26f2
+  creationTimestamp: 2019-12-20T18:30:36Z
+  generateName: kt-user-service-deployment-f55647cbb-
+  labels:
+    app: Student-Home
+    chart: user-0.1.0
+    heritage: Tiller
+    name: kt-user-service
+    pod-template-hash: f55647cbb
+    release: pgcampus-dev
+    tier: backend
+  name: kt-user-service-deployment-f55647cbb-nq8bf
+  namespace: campus
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: kt-user-service-deployment-f55647cbb
+    uid: d07c011d-2356-11ea-8f8d-160dc81a434c
+  resourceVersion: "52250091"
+  selfLink: /api/v1/namespaces/campus/pods/kt-user-service-deployment-f55647cbb-nq8bf
+  uid: d08fd4b0-2356-11ea-8f8d-160dc81a434c
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: agentpool
+            operator: In
+            values:
+            - appsnode
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: name
+              operator: In
+              values:
+              - kt-user-service
+          topologyKey: kubernetes.io/hostname
+        weight: 100
+  containers:
+  - env:
+    - name: REDIS_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: redis-password
+          name: cache-redis
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: GRPC_Proxy
+      value: $(NODE_NAME):4340
+    - name: KUBERNETES_PORT_443_TCP_ADDR
+      value: usnc-aks-dev-a97bf8f2.hcp.northcentralus.azmk8s.io
+    - name: KUBERNETES_PORT
+      value: tcp://usnc-aks-dev-a97bf8f2.hcp.northcentralus.azmk8s.io:443
+    - name: KUBERNETES_PORT_443_TCP
+      value: tcp://usnc-aks-dev-a97bf8f2.hcp.northcentralus.azmk8s.io:443
+    - name: KUBERNETES_SERVICE_HOST
+      value: usnc-aks-dev-a97bf8f2.hcp.northcentralus.azmk8s.io
+    envFrom:
+    - configMapRef:
+        name: general-configmap
+    - configMapRef:
+        name: kt-user-service-configmap
+    - secretRef:
+        name: kt-user-service-secrets
+        optional: true
+    image: k8skheacr.azurecr.io/kt.user.service:develop-8b56af0
+    imagePullPolicy: Always
+    livenessProbe:
+      exec:
+        command:
+        - /bin/sh
+        - -c
+        - '/app/grpc_cli call 127.0.0.1:50051 --proto_path /app/protos --protofiles=health.proto
+          Check "" | grep "status: SERVING"'
+      failureThreshold: 3
+      initialDelaySeconds: 25
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 1
+    name: kt-user-service-container
+    ports:
+    - containerPort: 50051
+      protocol: TCP
+    readinessProbe:
+      exec:
+        command:
+        - /bin/sh
+        - -c
+        - '/app/grpc_cli call 127.0.0.1:50051 --proto_path /app/protos --protofiles=health.proto
+          Check "" | grep "status: SERVING"'
+      failureThreshold: 5
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      limits:
+        cpu: 500m
+        memory: 500Mi
+      requests:
+        cpu: 250m
+        memory: 250Mi
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 1000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /app/settings
+      name: shared-settings-volume
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-cf86v
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  imagePullSecrets:
+  - name: acr-credentials
+  nodeName: aks-appsnode-33154159-12
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - configMap:
+      defaultMode: 420
+      name: shared-settings
+    name: shared-settings-volume
+  - name: default-token-cf86v
+    secret:
+      defaultMode: 420
+      secretName: default-token-cf86v
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: 2019-12-20T18:30:36Z
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: 2019-12-20T18:30:50Z
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: 2019-12-20T18:30:50Z
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: 2019-12-20T18:30:36Z
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://c0885ac577f58dc8cc8d191e30c868745426c605e220ccf23b16655eadd2a5ad
+    image: k8skheacr.azurecr.io/kt.user.service:develop-8b56af0
+    imageID: docker-pullable://k8skheacr.azurecr.io/kt.user.service@sha256:c10008575485785b7baa74722c4176918babbfeef75ec54425935cd3904f60a7
+    lastState: {}
+    name: kt-user-service-container
+    ready: true
+    restartCount: 0
+    state:
+      running:
+        startedAt: 2019-12-20T18:30:42Z
+  hostIP: 172.22.32.255
+  phase: Running
+  podIP: 172.22.33.1
+  qosClass: Burstable
+  startTime: 2019-12-20T18:30:36Z
