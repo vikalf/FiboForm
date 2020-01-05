@@ -1,7 +1,8 @@
 using FiboForm.Api.Components.Definition;
 using FiboForm.Api.Components.Implementation;
+using FiboForm.Api.Repositories.Definition;
+using FiboForm.Api.Repositories.Implementation;
 using FiboForm.Common;
-using Grpc.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
@@ -49,8 +50,8 @@ namespace FiboForm.Api
             });
 
             services.AddHttpClient();
-
-            SetupGrpcClients(services);
+            SetupRedis(services);
+            // SetupGrpcClients(services);
 
             services.AddMvc().AddNewtonsoftJson();
 
@@ -61,21 +62,36 @@ namespace FiboForm.Api
                 loggingbuilder.AddSerilog(dispose: true);
             });
 
-            services.AddScoped<IFiboComponent, FiboComponent>();
+            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddSingleton<IFiboComponent, FiboComponent>();
+            services.AddSingleton<IFiboRepository, FiboRepository>();
 
 
         }
 
-        private void SetupGrpcClients(IServiceCollection services)
+
+        private static void SetupRedis(IServiceCollection services)
         {
-            var grpc_proxy = EnvironmentSettings.GetEnvironmentVariable("GRPC_Proxy", "127.0.0.1:50051");
-            var channel = new Channel(grpc_proxy, ChannelCredentials.Insecure);
-
-            services.AddSingleton(
-                typeof(Fibo.Definition.Fibo.FiboClient),
-                new Fibo.Definition.Fibo.FiboClient(channel));
-
+            var redisAddress = EnvironmentSettings.GetEnvironmentVariable("REDIS_HOST", "192.168.99.100:6379");
+            var instanceName = EnvironmentSettings.GetEnvironmentVariable("REDIS_INSTANCE", "master");
+            services.AddDistributedRedisCache(options =>
+            {
+                options.Configuration = redisAddress;
+                options.InstanceName = instanceName;
+            });
         }
+
+
+        //private void SetupGrpcClients(IServiceCollection services)
+        //{
+        //    var grpc_proxy = EnvironmentSettings.GetEnvironmentVariable("GRPC_Proxy", "127.0.0.1:50051");
+        //    var channel = new Channel(grpc_proxy, ChannelCredentials.Insecure);
+
+        //    services.AddSingleton(
+        //        typeof(Fibo.Definition.Fibo.FiboClient),
+        //        new Fibo.Definition.Fibo.FiboClient(channel));
+
+        //}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)

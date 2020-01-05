@@ -14,6 +14,8 @@ namespace FiboForm.Api
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseKestrel();
+                    webBuilder.UseUrls("http://0.0.0.0:81");
                     webBuilder.UseStartup<Startup>();
                 });
     }
