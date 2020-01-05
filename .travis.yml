@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t vikalf/fiboform.service -f ./src/Dockerfile.FiboService ./src
+  #- docker build -t vikalf/fiboform.service -f ./src/Dockerfile.FiboService ./src
   - docker build -t vikalf/fiboform.api -f ./src/Dockerfile.FiboFormApi ./src
   - docker build -t vikalf/fiboform.web -f ./src/Dockerfile.FiboFormWeb ./src
 
@@ -11,19 +11,19 @@ script:
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   #Take those images and push them to docker hub
-  - docker push vikalf/fiboform.service
+  #- docker push vikalf/fiboform.service
   - docker push vikalf/fiboform.api
   - docker push vikalf/fiboform.web
 
-deploy:
-  edge: true
-  provider: elasticbeanstalk
-  region: us-east-1
-  app: fiboform
-  env: FiboForm-env
-  bucket_name: elasticbeanstalk-us-east-1-238939573193
-  bucket_path: fiboform
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
-  on:
-    branch: master
+#deploy:
+#  edge: true
+#  provider: elasticbeanstalk
+#  region: us-east-1
+#  app: fiboform
+#  env: FiboForm-env
+#  bucket_name: elasticbeanstalk-us-east-1-238939573193
+#  bucket_path: fiboform
+#  access_key_id: $AWS_ACCESS_KEY
+#  secret_access_key: $AWS_SECRET_KEY
+#  on:
+#    branch: master

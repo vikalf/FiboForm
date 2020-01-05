@@ -61,8 +61,7 @@ namespace FiboForm.Api
                 loggingbuilder.AddDebug();
                 loggingbuilder.AddSerilog(dispose: true);
             });
-
-            services.AddSingleton<IConfiguration>(Configuration);
+            
             services.AddSingleton<IFiboComponent, FiboComponent>();
             services.AddSingleton<IFiboRepository, FiboRepository>();
 

@@ -2,8 +2,9 @@
   "profiles": {
     "FiboForm.Api": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "fibo",
+      "applicationUrl": "http://localhost:5001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "REDIS_HOST" : "192.168.99.100:6379",
