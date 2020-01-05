@@ -29,6 +29,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{CD01510B-9B5D-40DE-A22A-751698C37D2B}"
 	ProjectSection(SolutionItems) = preProject
 		example-pod.yaml = example-pod.yaml
+		fiboweb-deployment.yaml = fiboweb-deployment.yaml
 		fiboweb-node-port.yaml = fiboweb-node-port.yaml
 		fiboweb-pod.yaml = fiboweb-pod.yaml
 	EndProjectSection
