@@ -1,19 +1,6 @@
 {
   "AWSEBDockerrunVersion": 2,
   "containerDefinitions": [
-    //{
-    //  "name": "fiboform-service",
-    //  "image": "vikalf/fiboform.service",
-    //  "hostname": "fiboform-service",
-    //  "essencial": true,
-    //  "memory": 128,
-    //  "portMappings": [
-    //    {
-    //      "hostPort": "50051",
-    //      "containerPort": "50051"
-    //    }
-    //  ]
-    //},
     {
       "name": "fiboform-api",
       "image": "vikalf/fiboform.api",
