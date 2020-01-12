@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fiboapi-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: api
+  ports:
+    - port: 80
+      targetPort: 80

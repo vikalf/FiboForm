@@ -6,7 +6,9 @@
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "API_URL": "http://localhost:5001"
+        "API_BASE_URL": "http://localhost:5001",
+        "FIBO_PAYLOAD_URL": "/fibo",
+        "FIBO_SEARCH_URL": "/fibo/{0}"
       }
     }
   }

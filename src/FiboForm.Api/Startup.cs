@@ -3,6 +3,8 @@ using FiboForm.Api.Components.Implementation;
 using FiboForm.Api.Repositories.Definition;
 using FiboForm.Api.Repositories.Implementation;
 using FiboForm.Common;
+using FiboForm.Common.Components.Definition;
+using FiboForm.Common.Components.Implementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
@@ -49,9 +51,11 @@ namespace FiboForm.Api
                     .AllowAnyHeader());
             });
 
+            services.AddSingleton<IEnvironmentSettings, EnvironmentSettings>();
+            services.AddSingleton<IFiboComponent, FiboComponent>();
+            services.AddSingleton<IFiboRepository, FiboRepository>();
+
             services.AddHttpClient();
-            SetupRedis(services);
-            // SetupGrpcClients(services);
 
             services.AddMvc().AddNewtonsoftJson();
 
@@ -61,9 +65,8 @@ namespace FiboForm.Api
                 loggingbuilder.AddDebug();
                 loggingbuilder.AddSerilog(dispose: true);
             });
-            
-            services.AddSingleton<IFiboComponent, FiboComponent>();
-            services.AddSingleton<IFiboRepository, FiboRepository>();
+
+            SetupRedis(services);
 
 
         }
@@ -71,26 +74,20 @@ namespace FiboForm.Api
 
         private static void SetupRedis(IServiceCollection services)
         {
-            var redisAddress = EnvironmentSettings.GetEnvironmentVariable("REDIS_HOST", "192.168.99.100:6379");
-            var instanceName = EnvironmentSettings.GetEnvironmentVariable("REDIS_INSTANCE", "master");
+            using var scope = services.BuildServiceProvider().CreateScope();
+            var _envSettings = scope.ServiceProvider.GetRequiredService<IEnvironmentSettings>();
+
+            var redisAddress = _envSettings.GetEnvironmentVariable("REDIS_HOST");
+            var redisPort = _envSettings.GetEnvironmentVariable("REDIS_PORT");
+            var instanceName = _envSettings.GetEnvironmentVariable("REDIS_INSTANCE", "master");
+
+
             services.AddDistributedRedisCache(options =>
             {
-                options.Configuration = redisAddress;
+                options.Configuration = string.Format("{0}:{1}", redisAddress, redisPort);
                 options.InstanceName = instanceName;
             });
         }
-
-
-        //private void SetupGrpcClients(IServiceCollection services)
-        //{
-        //    var grpc_proxy = EnvironmentSettings.GetEnvironmentVariable("GRPC_Proxy", "127.0.0.1:50051");
-        //    var channel = new Channel(grpc_proxy, ChannelCredentials.Insecure);
-
-        //    services.AddSingleton(
-        //        typeof(Fibo.Definition.Fibo.FiboClient),
-        //        new Fibo.Definition.Fibo.FiboClient(channel));
-
-        //}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)

@@ -7,8 +7,10 @@
       "applicationUrl": "http://localhost:5001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "REDIS_HOST": "fiboform-redis.alxkp8.0001.use1.cache.amazonaws.com:6379",
-        "PG_SERVER": "maindb.cvfbs6aalen6.us-east-1.rds.amazonaws.com",
+        "REDIS_HOST": "192.168.99.102",
+        "REDIS_PORT": "6379",
+        "REDIS_INSTANCE": "master",
+        "PG_SERVER": "192.168.99.102",
         "PG_PORT": "5432",
         "PG_DATABASE": "maindb",
         "PG_USER": "superuser",

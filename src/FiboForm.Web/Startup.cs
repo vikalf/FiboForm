@@ -1,3 +1,5 @@
+using FiboForm.Common.Components.Definition;
+using FiboForm.Common.Components.Implementation;
 using FiboForm.Web.Repositories.Definition;
 using FiboForm.Web.Repositories.Implementation;
 using Microsoft.AspNetCore.Builder;
@@ -36,6 +38,7 @@ namespace FiboForm.Web
         {
             services.AddControllersWithViews();
             services.AddScoped<IFiboFormRepository, FiboFormRepository>();
+            services.AddSingleton<IEnvironmentSettings, EnvironmentSettings>();
 
             services.AddMvc().AddNewtonsoftJson();
             services.AddHttpClient();

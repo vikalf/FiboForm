@@ -1,4 +1,5 @@
 ﻿using FiboForm.Common;
+using FiboForm.Common.Components.Definition;
 using FiboForm.Web.Models;
 using FiboForm.Web.Repositories.Definition;
 using Microsoft.Extensions.Logging;
@@ -14,17 +15,19 @@ namespace FiboForm.Web.Repositories.Implementation
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly ILogger<FiboFormRepository> _logger;
+        private readonly IEnvironmentSettings _environmentSettings;
 
-        public FiboFormRepository(IHttpClientFactory httpClientFactory, ILogger<FiboFormRepository> logger)
+        public FiboFormRepository(IHttpClientFactory httpClientFactory, ILogger<FiboFormRepository> logger, IEnvironmentSettings environmentSettings)
         {
             _httpClientFactory = httpClientFactory;
             _logger = logger;
+            _environmentSettings = environmentSettings;
         }
 
         public async Task<FiboModel> GetPayload()
-        
         {
-            var url = EnvironmentSettings.GetEnvironmentVariable("API_URL") + "/fibo";
+            var baseUrl = _environmentSettings.GetEnvironmentVariable("API_BASE_URL");
+            var payloadUrl = _environmentSettings.GetEnvironmentVariable("FIBO_PAYLOAD_URL");
 
             using (var client = _httpClientFactory.CreateClient())
             {
@@ -32,7 +35,7 @@ namespace FiboForm.Web.Repositories.Implementation
                 {
                     Content = null,
                     Method = HttpMethod.Get,
-                    RequestUri = new System.Uri(url)
+                    RequestUri = new System.Uri(baseUrl + payloadUrl)
                 };
 
                 var response = await client.SendAsync(request);
@@ -52,7 +55,8 @@ namespace FiboForm.Web.Repositories.Implementation
 
         public async Task<FiboModel> SearchIndex(int index)
         {
-            var url = EnvironmentSettings.GetEnvironmentVariable("API_URL") + $"/fibo/{index}";
+            var baseUrl = _environmentSettings.GetEnvironmentVariable("API_BASE_URL");
+            var searchUrl = string.Format(_environmentSettings.GetEnvironmentVariable("FIBO_SEARCH_URL"), index);
 
             using (var client = _httpClientFactory.CreateClient())
             {
@@ -60,7 +64,7 @@ namespace FiboForm.Web.Repositories.Implementation
                 {
                     Content = null,
                     Method = HttpMethod.Post,
-                    RequestUri = new System.Uri(url)
+                    RequestUri = new System.Uri(baseUrl + searchUrl)
                 };
 
                 var response = await client.SendAsync(request);

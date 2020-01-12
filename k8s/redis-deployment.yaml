@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fiboweb-deployment
+  name: redis-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: web
+      component: redis
   template:
     metadata:
       labels:
-        component: web
+        component: redis
     spec:
       containers:
-        - name: fiboweb
-          image: vikalf/fiboform.web
+        - name: redis
+          image: redis
           ports:
-            - containerPort: 80
+            - containerPort: 6379

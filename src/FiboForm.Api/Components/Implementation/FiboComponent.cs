@@ -64,9 +64,12 @@ namespace FiboForm.Api.Components.Implementation
 
         private async Task<VisitedValuesModel> GetVisitedValues()
         {
-            VisitedValuesModel result = new VisitedValuesModel();
-            result.Indexes = await _fiboRepository.GetVisitedValuesFromDb();
-            result.VisitedValues = await GetVisitedValuesFromRedis();
+
+            VisitedValuesModel result = new VisitedValuesModel
+            {
+                Indexes = await _fiboRepository.GetVisitedValuesFromDb(),
+                VisitedValues = await GetVisitedValuesFromRedis()
+            };
 
             return result;
 
@@ -88,37 +91,53 @@ namespace FiboForm.Api.Components.Implementation
 
         private async Task<bool> SaveFiboValueRedis(int index, int fiboNumeral)
         {
-            var cacheKey = "fibo_visited_values";
-            var visitedValuesBytes = await _distributedCache.GetAsync(cacheKey);
-            var values = new Dictionary<int, int>();
-            if (visitedValuesBytes == null)
+            try
             {
-                // if Empty, save first key-value pair
-                values.Add(index, fiboNumeral);
-                var valuesBytes = Helpers.ToByteArray<Dictionary<int, int>>(values);
-                await _distributedCache.SetAsync(cacheKey, valuesBytes);
-            }
-            else
-            {
-                var valuesBytes = await _distributedCache.GetAsync(cacheKey);
-                values = Helpers.FromByteArray<Dictionary<int, int>>(valuesBytes);
-
-                if (!values.Any(e => e.Key == index))
+                var cacheKey = "fibo_visited_values";
+                var visitedValuesBytes = await _distributedCache.GetAsync(cacheKey);
+                var values = new Dictionary<int, int>();
+                if (visitedValuesBytes == null)
                 {
+                    // if Empty, save first key-value pair
                     values.Add(index, fiboNumeral);
-                    valuesBytes = Helpers.ToByteArray<Dictionary<int, int>>(values);
+                    var valuesBytes = Helpers.ToByteArray<Dictionary<int, int>>(values);
                     await _distributedCache.SetAsync(cacheKey, valuesBytes);
                 }
-            }
+                else
+                {
+                    var valuesBytes = await _distributedCache.GetAsync(cacheKey);
+                    values = Helpers.FromByteArray<Dictionary<int, int>>(valuesBytes);
 
-            return true;
+                    if (!values.Any(e => e.Key == index))
+                    {
+                        values.Add(index, fiboNumeral);
+                        valuesBytes = Helpers.ToByteArray<Dictionary<int, int>>(values);
+                        await _distributedCache.SetAsync(cacheKey, valuesBytes);
+                    }
+                }
+
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, "SaveFiboValueRedis({index}, {fiboNumeral})", index, fiboNumeral);
+                return false;
+            }
 
         }
 
         private async Task<bool> SaveFiboIndexPostgres(int fiboIndex)
         {
-            await _fiboRepository.InsertValue(fiboIndex);
-            return true;
+            try
+            {
+                await _fiboRepository.InsertValue(fiboIndex);
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, "SaveFiboIndexPostgres({fiboIndex})", fiboIndex);
+                return false;
+            }
         }
 
 

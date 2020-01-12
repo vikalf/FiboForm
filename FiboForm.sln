@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployment", "deployment", 
 		.dockerignore = .dockerignore
 		.travis.yml = .travis.yml
 		src\docker-compose.yml = src\docker-compose.yml
+		DockerCommands.txt = DockerCommands.txt
 		src\Dockerfile.FiboFormApi = src\Dockerfile.FiboFormApi
 		src\Dockerfile.FiboFormWeb = src\Dockerfile.FiboFormWeb
 		src\Dockerfile.FiboService = src\Dockerfile.FiboService
@@ -28,10 +29,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiboForm.Common", "src\Fibo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{CD01510B-9B5D-40DE-A22A-751698C37D2B}"
 	ProjectSection(SolutionItems) = preProject
-		example-pod.yaml = example-pod.yaml
-		fiboweb-deployment.yaml = fiboweb-deployment.yaml
-		fiboweb-node-port.yaml = fiboweb-node-port.yaml
-		fiboweb-pod.yaml = fiboweb-pod.yaml
+		k8s\database-persistent-volume-claim.yaml = k8s\database-persistent-volume-claim.yaml
+		k8s\fiboapi-cluster-ip-service.yaml = k8s\fiboapi-cluster-ip-service.yaml
+		k8s\fiboapi-deployment.yaml = k8s\fiboapi-deployment.yaml
+		k8s\fiboweb-cluster-ip-service.yaml = k8s\fiboweb-cluster-ip-service.yaml
+		k8s\fiboweb-deployment.yaml = k8s\fiboweb-deployment.yaml
+		k8s\ingress-service.yaml = k8s\ingress-service.yaml
+		k8s\postgres-cluster-ip-service.yaml = k8s\postgres-cluster-ip-service.yaml
+		k8s\postgres-deployment.yaml = k8s\postgres-deployment.yaml
+		k8s\redis-cluster-ip-service.yaml = k8s\redis-cluster-ip-service.yaml
+		k8s\redis-deployment.yaml = k8s\redis-deployment.yaml
 	EndProjectSection
 EndProject
 Global

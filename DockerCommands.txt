@@ -1,0 +1,2 @@
+docker run -p 6379:6379 redis
+docker run -p 5432:5432 -e POSTGRES_PASSWORD=password01 -e POSTGRES_USER=superuser -e POSTGRES_DB=maindb -d postgres
