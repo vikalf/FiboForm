@@ -4,16 +4,16 @@ services:
 
 before_install:
   #- docker build -t vikalf/fiboform.service -f ./src/Dockerfile.FiboService ./src
-  - docker build -t vikalf/fiboform.api:v2 -f ./src/Dockerfile.FiboFormApi ./src
-  - docker build -t vikalf/fiboform.web:v2 -f ./src/Dockerfile.FiboFormWeb ./src
+  - docker build -t vikalf/fiboform.api:v2.1 -f ./src/Dockerfile.FiboFormApi ./src
+  - docker build -t vikalf/fiboform.web:v2.1 -f ./src/Dockerfile.FiboFormWeb ./src
 
 script:
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   #Take those images and push them to docker hub
   #- docker push vikalf/fiboform.service
-  - docker push vikalf/fiboform.api:v2
-  - docker push vikalf/fiboform.web:v2
+  - docker push vikalf/fiboform.api:v2.1
+  - docker push vikalf/fiboform.web:v2.1
 
 #deploy:
 #  edge: true

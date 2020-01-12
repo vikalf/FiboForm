@@ -12,28 +12,26 @@ spec:
       labels:
         component: postgres
     spec:
-      volumes:
-        - name: postgres-storage
-          persistentVolumeClaim: 
-            claimName: database-persistent-volume-claim
+#      volumes:
+#        - name: postgres-storage
+#          persistentVolumeClaim: 
+#            claimName: database-persistent-volume-claim
       containers:
         - name: postgres
           image: postgres
           env:
-            - name: PG_PORT
-              value: '5432'
-            - name: PG_DATABASE
+            - name: POSTGRES_DB
               value: maindb
-            - name: PG_USER
+            - name: POSTGRES_USER
               value: superuser
-            - name: PG_PASSWORD
+            - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgres-db-password
                   key: PG_PASSWORD
           ports:
             - containerPort: 5432
-          volumeMounts:
-            - name: postgres-storage
-              mountPath: /var/lib/postgresql/data
-              subPath: postgres          
+#          volumeMounts:
+#            - name: postgres-storage
+#              mountPath: /var/lib/postgresql/data
+#              subPath: postgres          

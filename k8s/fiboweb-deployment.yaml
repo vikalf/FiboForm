@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: fiboweb-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       component: web
@@ -14,11 +14,15 @@ spec:
     spec:
       containers:
         - name: fiboweb
-          image: vikalf/fiboform.web
+          image: vikalf/fiboform.web:v2.1
           ports:
             - containerPort: 80
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: Development
-            - name: API_URL
-              value: fiboapi-cluster-ip-service
+            - name: API_BASE_URL
+              value: http://fiboapi-cluster-ip-service
+            - name: FIBO_PAYLOAD_URL
+              value: /api/fibo
+            - name: FIBO_SEARCH_URL
+              value: /api/fibo/{0}

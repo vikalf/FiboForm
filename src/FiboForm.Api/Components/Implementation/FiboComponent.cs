@@ -4,6 +4,7 @@ using FiboForm.Api.Repositories.Definition;
 using FiboForm.Common;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -65,28 +66,52 @@ namespace FiboForm.Api.Components.Implementation
         private async Task<VisitedValuesModel> GetVisitedValues()
         {
 
+            var Indexes = await GetVisitedValuesFromDb();
+            var VisitedValues = await GetVisitedValuesFromRedis();
+
             VisitedValuesModel result = new VisitedValuesModel
             {
-                Indexes = await _fiboRepository.GetVisitedValuesFromDb(),
-                VisitedValues = await GetVisitedValuesFromRedis()
+                Indexes = Indexes,
+                VisitedValues = VisitedValues
             };
 
             return result;
 
         }
 
+        private async Task<List<int>> GetVisitedValuesFromDb()
+        {
+            try
+            {
+                return await _fiboRepository.GetVisitedValuesFromDb();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "GetVisitedValuesFromDb()");
+                return new List<int>();
+            }
+        }
+
         private async Task<Dictionary<int, int>> GetVisitedValuesFromRedis()
         {
-            var cacheKey = "fibo_visited_values";
-            var visitedValuesBytes = await _distributedCache.GetAsync(cacheKey);
-            var values = new Dictionary<int, int>();
-            if (visitedValuesBytes != null)
+            try
             {
-                var valuesBytes = await _distributedCache.GetAsync(cacheKey);
-                values = Helpers.FromByteArray<Dictionary<int, int>>(valuesBytes);
-            }
+                var cacheKey = "fibo_visited_values";
+                var visitedValuesBytes = await _distributedCache.GetAsync(cacheKey);
+                var values = new Dictionary<int, int>();
+                if (visitedValuesBytes != null)
+                {
+                    var valuesBytes = await _distributedCache.GetAsync(cacheKey);
+                    values = Helpers.FromByteArray<Dictionary<int, int>>(valuesBytes);
+                }
 
-            return values;
+                return values;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "GetVisitedValuesFromRedis()");
+                return new Dictionary<int, int>();
+            }
         }
 
         private async Task<bool> SaveFiboValueRedis(int index, int fiboNumeral)
