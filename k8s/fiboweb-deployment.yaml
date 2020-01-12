@@ -23,6 +23,6 @@ spec:
             - name: API_BASE_URL
               value: http://fiboapi-cluster-ip-service
             - name: FIBO_PAYLOAD_URL
-              value: /api/fibo
+              value: /fibo
             - name: FIBO_SEARCH_URL
-              value: /api/fibo/{0}
+              value: /fibo/{0}
